@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="https://unpkg.com/vue@next"></script>
+    </head>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" />
+    <body>
+        <div id="app">
+            <h1>hello world!This is {{title}}</h1>
+            <p>{{counter}}</p>
+            <button class="border p-3" @click="counter--">-</button>
+            <button class="border p-3" @click="counter++">+</button>
+            <img v-bind:src="imageSrc" v-bind:width="100" />
+            <ul>
+                <li v-for="movie in movies" :key="movie">{{movie}}</li>
+            </ul>
+            <form @submit.prevent="onSubmit">
+                <input placeholder="Add Movie" type="text" v-model="newMovie" />
+                <button type="submit">Add movie</button>
+            </form>
+        </div>
+    </body>
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    title: 'Intro to Vue',
+                    counter: 0,
+                    imageSrc: 'http://www.fillmurray.com/350/350',
+                    movies: [
+                        'Ghostbusters',
+                        'Space Jam',
+                        'Lost in Translation',
+                    ],
+                    newMovie: '',
+                }
+            },
+            methods: {
+                onSubmit() {
+                    this.movies.push(this.newMovie)
+                    this.newMovie = ''
+                },
+            },
+        }).mount('#app')
+    </script>
+</html>
